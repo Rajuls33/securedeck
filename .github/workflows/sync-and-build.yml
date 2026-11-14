@@ -67,7 +67,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgtk-3-dev libxdo-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev libssl-dev pkg-config cmake
+          sudo apt-get install -y libgtk-3-dev libxdo-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev libssl-dev libasound2-dev pkg-config cmake
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
@@ -86,3 +86,4 @@ jobs:
           mkdir -p dist-release
           cp "target/${{ matrix.target }}/release/${{ matrix.bin_name }}" "dist-release/${{ matrix.out_name }}"
           gh release create "$TAG" "dist-release/${{ matrix.out_name }}" --title "Zerofye securedeck $TAG" --notes "Automated Zerofye build synced from upstream." || gh release upload "$TAG" "dist-release/${{ matrix.out_name }}" --clobber
+
